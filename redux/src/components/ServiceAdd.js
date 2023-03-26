@@ -6,10 +6,9 @@ export default function ServiceAdd() {
   const item = useSelector(state => state.serviceAdd);
   const check = useSelector(state => state.checkingEdit);
   const dispatch = useDispatch();
-  console.log(check);
   const handleChange = evt => {
     const {name, value} = evt.target;
-    dispatch(changeServiceField(name, value))
+    dispatch(changeServiceField(name, value));
   }
 
   const handleSubmit = evt => {

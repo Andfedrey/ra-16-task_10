@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { editCheckService, editService, editServiceField, removeService } from '../actions/actions';
+import { delletingServiceField, editCheckService, editService, editServiceField, removeService } from '../actions/actions';
 
 export default function ServiceList() {
   const items = useSelector(state => { 
@@ -11,7 +11,11 @@ export default function ServiceList() {
     dispatch(editServiceField(id, name, price));
     dispatch(editCheckService(true, id));
   }
-  const handleRemove = id => {dispatch(removeService(id))}
+  const handleRemove = id => {
+    dispatch(removeService(id))
+    dispatch(editCheckService(false));
+    dispatch(delletingServiceField());
+  }
   return (
     <div>
       <ul>
