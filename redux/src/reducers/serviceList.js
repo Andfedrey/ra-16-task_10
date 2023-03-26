@@ -1,5 +1,5 @@
 import {nanoid} from 'nanoid'
-import { EDIT_SERVICE } from '../actions/actionTypes';
+import { EDIT_SERVICE, FILTER_SERVICE } from '../actions/actionTypes';
 import {ADD_SERVICE, REMOVE_SERVICE} from '../actions/actionTypes'
 
 export const initialStateArr = [
@@ -18,6 +18,9 @@ export default function serviceListReducer(state = initialStateArr, action) {
       return state.filter(service => service.id !== id);
     case EDIT_SERVICE:
       return state.map(service => (service.id === action.payload.id) ? {...service, name: action.payload.name, price: action.payload.price } : service)
+    case FILTER_SERVICE:
+      const {text, arr} = action.payload
+      return arr.filter((service) => service.name.toLocaleLowerCase().includes(text.toLocaleLowerCase()))
     default:
       return state;
   }
